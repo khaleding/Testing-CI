@@ -1,0 +1,20 @@
+version: 2.1
+
+parameters:
+  setup-config-param:
+    default: "THIS IS A SETUP CONFIG PARAM"
+    type: string
+  yml-file:
+    default: "main.yml"
+    type: string
+
+jobs:
+  otherjob:
+    docker:
+      - image: cimg/base:2021.04
+    steps:
+      - run: echo OTHER JOB
+workflows:
+  workflow1:
+    jobs:
+      - otherjob
