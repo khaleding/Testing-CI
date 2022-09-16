@@ -14,7 +14,8 @@ jobs:
                     --data-raw '{
                                   "parameters": {
                                     "setup-config-param": "this is a new string",
-                                    "yml-file": "$AFFECTED_APP.yml"
+                                    "yml-file": "$AFFECTED_APP.yml",
+                                    "yml-path": "continue"
                                   }
                                 }'
 workflows:
