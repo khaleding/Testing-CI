@@ -6,28 +6,32 @@ orbs:
   continuation: circleci/continuation@0.1.2
 
 parameters:
+  affected-app: 
+    default: "none"
+    type: string
   setup-config-param:
-    default: "THIS IS A SETUP CONFIG PARAM"
+    default: "Exploring the Affected App"
     type: string
   yml-file:
     default: "main.yml"
     type: string
+  yml-path:
+    default: "continue"
 
 jobs:
-  not-setup:
-    docker:
-      - image: cimg/node:13.13
-    steps:
-      - run: echo << pipeline.parameters.setup-config-param >>
-      - run: echo << pipeline.parameters.other >>
-
+#   not-setup:
+#     docker:
+#       - image: cimg/node:13.13
+#     steps:
+#       - run: echo << pipeline.parameters.setup-config-param >>
+#       - run: echo << pipeline.parameters.other >>
   setup:
     executor: continuation/default
     steps:
       - checkout
       - run: echo << pipeline.parameters.setup-config-param >>
       - continuation/continue:
-          configuration_path: ".circleci/continue/<< pipeline.parameters.yml-file >>"
+          configuration_path: ".circleci/<< pipeline.parameters.yml-path >>/<< pipeline.parameters.yml-file >>"
 
 workflows:
   setup:
