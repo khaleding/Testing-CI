@@ -5,6 +5,7 @@ jobs:
       - image: cimg/base:2021.04
     steps:
       - run: echo dynamic config!
+      - run: echo "export AFFECTED_APP=other" >> $BASH_ENV
       - run: echo ${CIRCLE_PROJECT_USERNAME} ${CIRCLE_PROJECT_REPONAME}
       - run: | 
               curl --location --request POST "https://circleci.com/api/v2/project/gh/${CIRCLE_PROJECT_USERNAME}/${CIRCLE_PROJECT_REPONAME}/pipeline" \
@@ -13,7 +14,7 @@ jobs:
                     --data-raw '{
                                   "parameters": {
                                     "setup-config-param": "this is a new string",
-                                    "yml-file": "other.yml"
+                                    "yml-file": "$AFFECTED_APP.yml"
                                   }
                                 }'
 workflows:
