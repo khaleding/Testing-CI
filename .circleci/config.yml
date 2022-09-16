@@ -17,6 +17,7 @@ parameters:
     type: string
   yml-path:
     default: "continue"
+    type: string
 
 jobs:
 #   not-setup:
